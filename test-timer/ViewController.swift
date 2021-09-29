@@ -10,6 +10,13 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var CountHolder: NSTextField!
+    
+    @IBOutlet weak var CounterFlag: NSButton!
+    
+    var timer = Timer()
+    var runCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,10 +25,25 @@ class ViewController: NSViewController {
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+        
         }
     }
+    
+    @objc func SecCounter(timer: TimeInterval){
+        print("Timer fired!")
+        runCount += 1
+        CountHolder.stringValue = String(runCount)
+    }
 
-
+    @IBAction func CounterStart(_ sender: Any) {
+        if(CounterFlag.intValue == 1){
+            timer = Timer.scheduledTimer(
+                timeInterval: 1.0, target: self, selector: #selector(SecCounter),
+                userInfo: nil, repeats: true)
+        }else{
+            timer.invalidate();
+        }
+    }
+    
 }
 

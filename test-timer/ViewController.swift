@@ -56,6 +56,7 @@ class ViewController: NSViewController {
         CounterFlag.intValue = 0;
         timer.invalidate();
         runCount = 0;
+        CountHolder.stringValue = "0";
         isStart = false;
     }
 }
